@@ -13,6 +13,12 @@ class LoginPage:
         self.facebook_icon = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[3]/div[1]/a[2]')
         self.twitter_icon = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[3]/div[1]/a[3]')
         self.youtube_icon = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[3]/div[1]/a[4]')
+        self.web_link = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[3]/div[2]/p[2]/a')
+
+        # Error message elements
+        self.username_required_error = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/span')
+        self.password_required_error = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[2]/div/span')
+        self.invalid_credentials_error = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]')
 
     def load(self):
         self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
@@ -30,35 +36,70 @@ class LoginPage:
         login_button_element.click()
 
     def click_forgot_password(self):
-        """Click the 'Forgot Password' link."""
         forgot_password_element = self.driver.find_element(*self.forget_password_link)
         forgot_password_element.click()
 
+    def get_username_required_error(self):
+        return self.driver.find_element(*self.username_required_error).text
+
+    def get_password_required_error(self):
+        return self.driver.find_element(*self.password_required_error).text
+
+    def get_invalid_credentials_error(self):
+        return self.driver.find_element(*self.invalid_credentials_error).text
+
+    def is_username_required_error_displayed(self):
+        return self.driver.find_element(*self.username_required_error).is_displayed()
+
+    def is_password_required_error_displayed(self):
+        return self.driver.find_element(*self.password_required_error).is_displayed()
+
+    def is_invalid_credentials_error_displayed(self):
+        return self.driver.find_element(*self.invalid_credentials_error).is_displayed()
+
     def click_linkedin_icon(self):
-        """Click the LinkedIn icon and switch to the new tab."""
         linkedin_element = self.driver.find_element(*self.linkedin_icon)
         linkedin_element.click()
-        # Switch to the new tab
         windows = self.driver.window_handles
-        self.driver.switch_to.window(windows[-1])  # Switch to the newly opened LinkedIn tab
+        self.driver.switch_to.window(windows[-1])
 
     def click_facebook_icon(self):
-        """Click the Facebook icon and switch to the new tab."""
         facebook_element = self.driver.find_element(*self.facebook_icon)
         facebook_element.click()
         windows = self.driver.window_handles
         self.driver.switch_to.window(windows[-1])
 
     def click_twitter_icon(self):
-        """Click the Twitter icon and switch to the new tab."""
         twitter_element = self.driver.find_element(*self.twitter_icon)
         twitter_element.click()
         windows = self.driver.window_handles
         self.driver.switch_to.window(windows[-1])
 
     def click_youtube_icon(self):
-        """Click the YouTube icon and switch to the new tab."""
         youtube_element = self.driver.find_element(*self.youtube_icon)
         youtube_element.click()
         windows = self.driver.window_handles
         self.driver.switch_to.window(windows[-1])
+
+    def click_web_link(self):
+        web_link_element = self.driver.find_element(*self.web_link)
+        web_link_element.click()
+        windows = self.driver.window_handles
+        self.driver.switch_to.window(windows[-1])
+
+
+    def is_username_error_message_not_visible(self):
+        try:
+            # Check if the error message is not displayed
+            return not self.driver.find_element(*self.username_required_error).is_displayed()
+        except:
+            # If the element isn't found at all, it definitely isn't visible!
+            return True
+
+    def is_password_error_message_not_visible(self):
+        try:
+            # Check if the error message is not displayed
+            return not self.driver.find_element(*self.password_required_error).is_displayed()
+        except:
+            # If the element isn't found at all, it definitely isn't visible!
+            return True

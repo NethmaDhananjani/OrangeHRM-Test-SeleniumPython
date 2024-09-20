@@ -11,7 +11,7 @@ from util.base import BaseTest
 
 class TestForgetPassword(BaseTest):
     def test_forget_password(self):
-        self.keep_browser_open = True  # Keep the browser open after the test
+        self.keep_browser_open = True
         self.loginpage = LoginPage(self.driver)
         self.forgetpasswordpage = ForgetPasswordPage(self.driver)
 
@@ -49,8 +49,7 @@ class TestForgetPassword(BaseTest):
 
         # Step 8: Enter a username and clear it to trigger the error again
         self.forgetpasswordpage.enter_username("Ad")
-        time.sleep(1)  # Allow time for typing
-        # assert not self.forgetpasswordpage.is_error_message_visible(), "Error message should not be visible after typing."
+        time.sleep(1)
 
         # Simulate backspacing all the letters typed
         username_element = self.driver.find_element(*self.forgetpasswordpage.username_field)
