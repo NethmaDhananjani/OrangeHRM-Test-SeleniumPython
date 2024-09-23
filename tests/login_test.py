@@ -24,7 +24,6 @@ class TestLogin(BaseTest):
 
         # Step 3: Enter only username and click on the login button
         self.loginpage.enter_username("Admin")
-        # assert self.loginpage.is_error_message_not_visible(), "Error message should not be visible after typing."
         self.loginpage.click_login_button()
         time.sleep(1)
         assert self.loginpage.is_password_required_error_displayed(), "Password required message not displayed"
@@ -35,7 +34,6 @@ class TestLogin(BaseTest):
         self.loginpage.click_login_button()
         time.sleep(1)
         assert self.loginpage.is_username_required_error_displayed(), "Username required message not displayed"
-
 
 
         # Step 5: Enter a username and clear it to trigger the error again
