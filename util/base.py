@@ -6,12 +6,11 @@ class BaseTest:
         """Setup method to initialize the browser before each test."""
         # Set Chrome options to load Google as the homepage
         chrome_options = Options()
-        chrome_options.add_argument("start-maximized")  # Start Chrome maximized
-        chrome_options.add_argument("--disable-notifications")  # Disable notifications
-        chrome_options.add_argument("--disable-infobars")  # Disable Chrome's infobar
-        chrome_options.add_argument("homepage=https://www.google.com")  # Set Google as homepage
-        chrome_options.add_argument("--no-first-run")  # Disable first-run experience
-
+        chrome_options.add_argument("start-maximized")
+        chrome_options.add_argument("--disable-notifications")
+        chrome_options.add_argument("--disable-infobars")
+        chrome_options.add_argument("homepage=https://www.google.com")
+        chrome_options.add_argument("--no-first-run")
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.implicitly_wait(10)
 

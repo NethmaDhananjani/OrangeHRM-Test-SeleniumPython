@@ -6,8 +6,10 @@ import pytest
 import time
 from pages.login_page import LoginPage
 from util.base import BaseTest
+from util.base_withoutbrowserclose import BaseTestBrowser
 
-class TestSuccesfulLogin(BaseTest):
+
+class TestSuccesfulLogin(BaseTestBrowser):
     def test_successful_login(self):
         self.keep_browser_open = True  # Set flag to keep the browser open
         self.loginpage = LoginPage(self.driver)
@@ -20,10 +22,8 @@ class TestSuccesfulLogin(BaseTest):
         self.loginpage.enter_password("admin123")
         self.loginpage.click_login_button()
 
-        # Wait for the dashboard URL to load after login
         WebDriverWait(self.driver, 10).until(
             EC.url_to_be("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index")
         ), "URL did not change to dashboard after successful login"
 
-        # Optionally return the driver if you want to use it in another test
-        return self.driver  # Return the driver if needed in other tests
+        return self.driver
