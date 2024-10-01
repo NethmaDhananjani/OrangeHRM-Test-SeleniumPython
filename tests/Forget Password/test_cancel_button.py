@@ -1,8 +1,12 @@
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
+
 from pages.login_page import LoginPage
 from pages.forgetPassword_page import ForgetPasswordPage
 from util.base_withoutbrowserclose import BaseTestBrowser
 import time
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class TestCancelFunctionality(BaseTestBrowser):
     def test_cancel_button(self):
@@ -19,4 +23,7 @@ class TestCancelFunctionality(BaseTestBrowser):
         time.sleep(2)
 
         # Step 3: Verify navigation back to login page
-        # assert self.loginpage.is_login_page(), "Should navigate back to the login page."
+        WebDriverWait(self.driver, 10).until(
+            EC.url_to_be("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"),
+            "URL did not change to login page"
+        )

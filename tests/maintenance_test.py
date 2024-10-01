@@ -9,8 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class TestMaintenancePage(TestSuccesfulLogin):
 
-
-
     def test_maintenance_popup(self):
         # Step 1: Login
         self.loginpage = LoginPage(self.driver)
