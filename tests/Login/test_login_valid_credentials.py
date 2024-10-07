@@ -20,6 +20,6 @@ class TestLoginValidCredentials(BaseTestBrowser):
 
         # Verify successful login by checking the URL
         WebDriverWait(self.driver, 10).until(
-            EC.url_to_be("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"),
+            EC.url_to_be("https://opensource-demo.orangehrmlive.com/dashboard/index"),
             "URL did not change to dashboard after successful login"
         )

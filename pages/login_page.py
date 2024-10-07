@@ -21,7 +21,7 @@ class LoginPage:
         self.invalid_credentials_error = (By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]')
 
     def load(self):
-        self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+        self.driver.get("https://opensource-demo.orangehrmlive.com/auth/login")
 
     def enter_username(self, query):
         username_element = self.driver.find_element(*self.username_field)
